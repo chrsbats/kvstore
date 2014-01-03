@@ -4,36 +4,52 @@ class S3Adapter(object):
         from boto.s3.connection import S3Connection
         self.connection = S3Connection(aws_access_key, aws_secret_key)
 
-        if not self.connection.lookup(path):
-            self.connection.create_bucket(path)
-        self.bucket = self.connection.get_bucket(path, validate=False)
+        self.path = unicode(path)
+        if not self.connection.lookup(self.path):
+            self.connection.create_bucket(self.path)
+        self.bucket = self.connection.get_bucket(self.path, validate=False)
 
-    def get(self, path):
-        key = self.bucket.get_key(path)
-        if not key:
-            raise KeyError('Key not found: {}'.format(path))
-        key.open('r')
-        return key.read()
+    def key_path(self, key):
+        if key[0] != u'/':
+            key = u'/'+key
+        return key
 
-    def put(self, path, data):
+    def get(self, key):
+        full_path = self.key_path(key)
+        k = self.bucket.get_key(full_path)
+        if not k:
+            raise KeyError('Key not found: {}'.format(key))
+        return k.get_contents_as_string()
+
+    def put(self, key, data):
         from boto.s3.key import Key
-        key = Key(self.bucket)
-        key.key = path
-        key.set_contents_from_string(data)
+        full_path = self.key_path(key)
+        k = Key(self.bucket)
+        k.key = full_path
+        k.set_contents_from_string(data)
 
-    def delete(self, path):
+    def delete(self, key):
         from boto.s3.key import Key
-        key = Key(self.bucket)
-        key.name = path
-        key.delete()
+        full_path = self.key_path(key)
+        k = Key(self.bucket)
+        k.name = full_path
+        k.delete()
 
-    def exists(self, path):
-        return self.bucket.get_key(path) is not None
+    def exists(self, key):
+        full_path = self.key_path(key)
+        return self.bucket.get_key(full_path) is not None
 
-    def list(self, path):
-        if path == '/':
-            path = None
-        for key in self.bucket.list(prefix=path, delimiter='/'):
-            if key.name == path:
-                continue
-            yield key.name
+    def list(self, key=u'/'):
+        # we need slightly different paths for listing
+        # ensure we end in a /
+        if key[-1] != u'/':
+            key = key+u'/'
+        # ensure we don't start in a /
+        if key[0] == u'/':
+            key = key[1:]
+        for k in self.bucket.list(prefix=key):
+            name = k.name
+            # ensure we start with a /
+            if name[0] != u'/':
+                name = u'/'+name
+            yield name

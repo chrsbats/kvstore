@@ -13,15 +13,15 @@ Example
     >>> from __future__ import print_function
     >>> from store import create
     >>> store = create('file://./test_data')
-    >>> store.put('test_data.txt', 'Raw data goes in here')
-    >>> print(list(store.list('/')))
-    ['test_data.txt']
-    >>> store.exists('test_data.txt')
+    >>> store.put('/my_data/some_text', 'Raw data goes in here')
+    >>> print(list(store.list('/my_data')))
+    ['/my_data/some_text']
+    >>> store.exists('/my_data/some_text')
     True
-    >>> print(store.get('test_data.txt'))
+    >>> print(store.get('/my_data/some_text'))
     Raw data goes in here
-    >>> store.delete('test_data.txt')
-    >>> store.exists('test_data.txt')
+    >>> store.delete('/my_data/some_text')
+    >>> store.exists('/my_data/some_text')
     False
 
 

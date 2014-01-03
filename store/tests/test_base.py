@@ -46,6 +46,8 @@ class TestBase(unittest.TestCase):
         adapter.put(file2, data2)
 
         self.assertTrue(file2 in adapter.list('/dir1'))
+        self.assertFalse(file2 in adapter.list('/dir1/dir2'))
+        self.assertFalse(file1 in adapter.list('/dir1/dir3'))
 
         # delete
         adapter.delete(file1)

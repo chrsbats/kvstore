@@ -1,5 +1,7 @@
+from __future__ import absolute_import
 import traceback
 import os, errno
+from .signal import interrupt_protect
 
 class FileSystemAdapter(object):
 
@@ -29,6 +31,7 @@ class FileSystemAdapter(object):
             if e.errno == errno.ENOENT:
                 raise KeyError('{}: {}'.format(key,str(e)))
 
+    @interrupt_protect
     def put(self, key, data):
         full_path = self.key_path(key)
         directory = os.path.dirname(full_path)

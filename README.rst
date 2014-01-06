@@ -2,7 +2,9 @@
 Store
 =====
 
-A simple, persistent key / value data store with multiple back-end adapters.
+A simple, persistent key / value data store with support for various data stores through adaptors.
+
+Store currently supports filesystems and S3.
 
 
 Example
@@ -30,4 +32,9 @@ Adapters
 
 * file system - file://
 * S3 - s3://
+
+Authors
+=======
+
+Store was created by Christopher Bates (@chrsbats) and cleaned up by Adam Griffiths (@adamlwgriffiths).
 

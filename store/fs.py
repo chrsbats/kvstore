@@ -63,6 +63,8 @@ class FileSystemAdapter(object):
         full_path = self.key_path(key)
         for directory, subdirs, files in os.walk(full_path):
             for file in files:
+                if file[0] == '.':
+                    continue
                 path = os.path.join(directory, file)
                 # remove our directory
                 path = path.split(self.directory)[1]

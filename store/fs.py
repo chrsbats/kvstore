@@ -6,7 +6,7 @@ from .signal import interrupt_protect
 class FileSystemAdapter(object):
 
     def __init__(self, path, **kwargs):
-        self.directory = unicode(os.path.abspath(path))
+        self.directory = os.path.abspath(path)
         self.make_sure_path_exists(self.directory)
 
     def make_sure_path_exists(self, key):
@@ -17,10 +17,10 @@ class FileSystemAdapter(object):
                 raise
 
     def key_path(self, key):
-        key = unicode(key)
-        if key[0] == u'/':
+        key = key
+        if key[0] == '/':
             key = key[1:]
-        return os.path.join(self.directory, unicode(key))
+        return os.path.join(self.directory, key)
 
     def get(self, key):
         full_path = self.key_path(key)
@@ -30,6 +30,7 @@ class FileSystemAdapter(object):
         except IOError as e:
             if e.errno == errno.ENOENT:
                 raise KeyError('{}: {}'.format(key,str(e)))
+            raise
 
     @interrupt_protect
     def put(self, key, data):

@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 import traceback
 import os, errno
+import shutil
 from .signal import interrupt_protect
 
 class FileSystemAdapter(object):
@@ -69,3 +70,8 @@ class FileSystemAdapter(object):
                 # remove our directory
                 path = path.split(self.directory)[1]
                 yield path
+
+    def drop_all(self):
+        # delete the directory and then recreate it
+        shutil.rmtree(self.directory, ignore_errors=True)
+        self.make_sure_path_exists(self.directory)

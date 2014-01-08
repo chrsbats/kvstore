@@ -53,3 +53,6 @@ class S3Adapter(object):
             if name[0] != u'/':
                 name = u'/'+name
             yield name
+
+    def drop_all(self):
+        self.bucket.delete_keys([key.name for key in self.bucket])

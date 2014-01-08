@@ -62,7 +62,9 @@ class TestBase(unittest.TestCase):
         self.assertTrue(file2 in adapter.list('/dir1'))
         self.assertFalse(file1 in adapter.list('/dir1'))
 
-        adapter.delete(file2)
+        adapter.drop_all()
 
         self.assertFalse(file2 in adapter.list('/dir1'))
         self.assertRaises(KeyError, adapter.get, file2)
+        self.assertFalse(adapter.exists(file1))
+        self.assertFalse(adapter.exists(file2))

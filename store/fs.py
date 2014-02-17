@@ -7,7 +7,9 @@ from .signal import interrupt_protect
 class FileSystemAdapter(object):
 
     def __init__(self, path, **kwargs):
-        self.directory = os.path.abspath(path)
+        # expand ~ or we'll end up creating a /~ directory
+        # abspath doesn't do this for us
+        self.directory = os.path.abspath(os.path.expanduser(path))
         self.make_sure_path_exists(self.directory)
 
     def make_sure_path_exists(self, key):

@@ -5,7 +5,7 @@ setup(
     version='0.1',
     author='C Bates',
     author_email='chrsbats@gmail.com',
-    packages=['store'],
+    packages=['kvstore'],
     scripts=[],
     url='https://github.com/chrsbats/store',
     license='LICENSE.TXT',

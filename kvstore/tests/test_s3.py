@@ -1,8 +1,8 @@
 import unittest
 import os
-from store import create
+from kvstore import create
 from boto.s3.connection import S3Connection
-from store.tests.test_base import TestBase
+from kvstore.tests.test_base import TestBase
 
 class TestS3(TestBase):
     path = 'pystore-test'

@@ -30,8 +30,16 @@ Example
 Adapters
 ========
 
-* file system - file://
-* S3 - s3://
+* file system - file://<directory>
+* S3 - s3://<s3_key>:<s3_secret>@<bucket>
+
+
+Motivation
+==========
+
+KVstore attempts to be efficient with in regards to calls to s3, unlike some other s3 wrappers that sometimes use multiple calls for simple operations in order acheive a broader feature set (which can make s3 expensive in terms of $ when making many operations).
+
+The filesystem adapter is useful for mocking out an s3 interface when testing locally.
 
 Authors
 =======

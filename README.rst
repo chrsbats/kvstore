@@ -13,8 +13,8 @@ Example
 ::
 
     >>> from __future__ import print_function
-    >>> from store import create
-    >>> store = create('file://./test_data')
+    >>> import kvstore
+    >>> store = kvstore.create('file://./test_data')
     >>> store.put('/my_data/some_text', 'Raw data goes in here')
     >>> print(list(store.list('/my_data')))
     ['/my_data/some_text']

@@ -30,27 +30,27 @@ Example
 Adapters
 ========
 
-* file system : 
+* file system::
 
-store = kvstore.create('file://'+relative_directory)
+   store = kvstore.create('file://'+relative_directory)
 
-* S3 - 
+* S3::
 
-os.environ['AWS_ACCESS_KEY_ID'] = aws_access_key_id
-os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
-store = kvstore.create('s3://'+s3_bucket_name)
+    os.environ['AWS_ACCESS_KEY_ID'] = aws_access_key_id
+    os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
+    store = kvstore.create('s3://'+s3_bucket_name)
 
 
 
 Motivation
 ==========
 
-KVstore attempts to be efficient with in regards to calls to s3, unlike some other s3 wrappers that sometimes use multiple calls for simple operations in order acheive a broader feature set (which can make s3 expensive in terms of $ when making many operations).
+KVstore attempts to be efficient with regards to calls to s3, unlike some other s3 wrappers that sometimes use multiple calls for simple operations in order acheive a broader feature set (which can make s3 expensive in terms of $ when making many operations).
 
-The filesystem adapter is useful for mocking out an s3 interface when testing locally.
+The filesystem adapter is also very useful when mocking out an s3 interface for testing locally.
 
 Authors
 =======
 
-Store was created by Christopher Bates (@chrsbats) and cleaned up by Adam Griffiths (@adamlwgriffiths).
+Store was created by Christopher Bates (@chrsbats) and Adam Griffiths (@adamlwgriffiths).
 

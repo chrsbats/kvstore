@@ -9,8 +9,8 @@ class FileSystemAdapter(object):
     def __init__(self, path, **kwargs):
         # expand ~ or we'll end up creating a /~ directory
         # abspath doesn't do this for us
-        self.directory = os.path.abspath(os.path.expanduser(path))
-        self.make_sure_path_exists(self.directory)
+        self.path = os.path.abspath(os.path.expanduser(path))
+        self.make_sure_path_exists(self.path)
 
     def make_sure_path_exists(self, key):
         try:
@@ -23,7 +23,7 @@ class FileSystemAdapter(object):
         key = key
         if key[0] == '/':
             key = key[1:]
-        return os.path.join(self.directory, key)
+        return os.path.join(self.path, key)
 
     def get(self, key):
         full_path = self.key_path(key)
@@ -70,10 +70,10 @@ class FileSystemAdapter(object):
                     continue
                 path = os.path.join(directory, file)
                 # remove our directory
-                path = path.split(self.directory)[1]
+                path = path.split(self.path)[1]
                 yield path
 
     def drop_all(self):
         # delete the directory and then recreate it
-        shutil.rmtree(self.directory, ignore_errors=True)
-        self.make_sure_path_exists(self.directory)
+        shutil.rmtree(self.path, ignore_errors=True)
+        self.make_sure_path_exists(self.path)

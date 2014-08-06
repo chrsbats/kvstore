@@ -27,7 +27,6 @@ class S3Adapter(object):
         full_path = self.key_path(key)
         k = Key(self.bucket)
         k.key = full_path
-        k.set_contents_from_string(data)
         if isinstance(mime, basestring):
             k.set_metadata("Content-Type", mime)
         elif mime == True:
@@ -35,6 +34,7 @@ class S3Adapter(object):
             mime = mimetypes.guess_type(key)
             if mime:
                 k.set_metadata("Content-Type", mime)
+        k.set_contents_from_string(data)
 
     def delete(self, key):
         from boto.s3.key import Key

@@ -36,7 +36,7 @@ class FileSystemAdapter(object):
             raise
 
     @interrupt_protect
-    def put(self, key, data):
+    def put(self, key, data, **kwargs):
         full_path = self.key_path(key)
         directory = os.path.dirname(full_path)
         self.make_sure_path_exists(directory)

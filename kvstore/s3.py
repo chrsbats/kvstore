@@ -1,3 +1,4 @@
+import mimetypes
 
 class S3Adapter(object):
     def __init__(self, path, aws_access_key=None, aws_secret_key=None, **kwargs):
@@ -21,12 +22,19 @@ class S3Adapter(object):
             raise KeyError('Key not found: {}'.format(key))
         return k.get_contents_as_string()
 
-    def put(self, key, data):
+    def put(self, key, data, mime=None, **kwargs):
         from boto.s3.key import Key
         full_path = self.key_path(key)
         k = Key(self.bucket)
         k.key = full_path
         k.set_contents_from_string(data)
+        if isinstance(mime, basestring):
+            k.set_metadata("Content-Type", mime)
+        elif mime == True:
+            # guess mime type
+            mime = mimetypes.guess_type(key)
+            if mime:
+                k.set_metadata("Content-Type", mime)
 
     def delete(self, key):
         from boto.s3.key import Key

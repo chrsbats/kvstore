@@ -1,9 +1,9 @@
 import mimetypes
 
 class S3Adapter(object):
-    def __init__(self, path, aws_access_key=None, aws_secret_key=None, **kwargs):
+    def __init__(self, path, **kwargs):
         from boto.s3.connection import S3Connection
-        self.connection = S3Connection(aws_access_key, aws_secret_key)
+        self.connection = S3Connection(**kwargs)
 
         self.path = unicode(path)
         if not self.connection.lookup(self.path):

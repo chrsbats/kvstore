@@ -1,10 +1,10 @@
 =====
-Store
+KV Store
 =====
 
-A simple, persistent key / value data store with support for various data stores through adaptors.
+An extremely simple, persistent key / value data store with support for various data stores through adaptors.
 
-Store currently supports filesystems and S3.
+KV Store currently supports filesystems and S3.  More to come.
 
 
 Example

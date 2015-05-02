@@ -7,7 +7,7 @@ setup(
     author_email='chrsbats@gmail.com',
     packages=['kvstore'],
     scripts=[],
-    url='https://github.com/chrsbats/store',
+    url='https://github.com/chrsbats/kvstore',
     license='LICENSE.TXT',
     description='Key value store with Filesystem and S3 backends',
     long_description='Key value store with Filesystem and S3 backends',

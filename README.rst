@@ -45,12 +45,12 @@ Adapters
 Motivation
 ==========
 
-KVstore attempts to be efficient with regards to calls to s3, unlike some other s3 wrappers that sometimes use multiple calls for simple operations in order acheive a broader feature set (which can make s3 expensive in terms of $ when making many operations).
+KV Store attempts to be efficient with regards to calls to s3, unlike some other s3 wrappers that sometimes use multiple calls for simple operations in order acheive a broader feature set (which can make s3 expensive in terms of $ when making many operations).
 
 The filesystem adapter is also very useful when mocking out an s3 interface for testing locally.
 
 Authors
 =======
 
-Store was created by Christopher Bates (@chrsbats) and Adam Griffiths (@adamlwgriffiths).
+KV Store was created by [Christopher Bates](https://github.com/chrsbats) and [Adam Griffiths](https://github.com/adamlwgriffiths).
 

@@ -28,15 +28,17 @@ Example
 Adapters
 ========
 
-* file system
+ * file system
+    ```
+    store = kvstore.create('file://'+relative_directory)
+    ```
 
-   store = kvstore.create('file://'+relative_directory)
-
-* S3
-
+ * S3
+    ```
     os.environ['AWS_ACCESS_KEY_ID'] = aws_access_key_id
     os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
     store = kvstore.create('s3://'+s3_bucket_name)
+    ```
 
 
 

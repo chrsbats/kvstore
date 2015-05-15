@@ -7,6 +7,13 @@ An extremely simple, persistent key / value data store with support for various 
 KV Store currently supports filesystems and S3.  More to come.
 
 
+Requirements
+============
+
+python 2.7
+boto 2.15.0
+
+
 Example
 =======
 

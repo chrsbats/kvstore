@@ -31,7 +31,7 @@ class S3Adapter(object):
             k.set_metadata("Content-Type", mime)
         elif mime == True:
             # guess mime type
-            mime = mimetypes.guess_type(key)
+            mime = mimetypes.guess_type(key)[0]
             if mime:
                 k.set_metadata("Content-Type", mime)
         k.set_contents_from_string(data)

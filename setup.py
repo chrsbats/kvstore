@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='kvstore',
-    version='0.3',
+    version='0.4',
     author='C Bates',
     author_email='chrsbats@gmail.com',
     packages=['kvstore'],
